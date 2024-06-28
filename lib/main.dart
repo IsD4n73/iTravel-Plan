@@ -1,11 +1,14 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/pages/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await GlobalInstance.initDB();
 
   Intl.defaultLocale = 'it_IT';
   runApp(const MyApp());

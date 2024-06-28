@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itravel/pages/widgets/appbar.dart';
 
 class INsertDaysPage extends StatefulWidget {
   final int travelDays;
@@ -17,6 +18,13 @@ class INsertDaysPage extends StatefulWidget {
 class _INsertDaysPageState extends State<INsertDaysPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: getAppAppbar(),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
