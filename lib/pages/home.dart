@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itravel/pages/insert_travel.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:itravel/pages/widgets/curved_list_item.dart';
 
@@ -20,7 +21,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: getAppAppbar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InsertTravelPage(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
