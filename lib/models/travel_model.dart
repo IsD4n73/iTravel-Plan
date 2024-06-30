@@ -3,6 +3,7 @@ import 'package:itravel/models/travel_day.dart';
 /*
 {
 	"travelTitle": "",
+        "travelText": "", 
 	"travelStartDate": "",
 	"travelEndDate": "",
 	"travelDaysNumber": 2,
@@ -30,11 +31,13 @@ class TravelModel {
     required this.travelCode,
     required this.travelDaysNumber,
     required this.travelDays,
+    this.travelText = null, 
   });
 
   final String? travelTitle;
   final String? travelStartDate;
   final String? travelEndDate;
+  final String? travelText;
   String? travelCode;
   final int? travelDaysNumber;
   final List<TravelDay> travelDays;
@@ -46,6 +49,7 @@ class TravelModel {
       travelEndDate: json["travelEndDate"],
       travelCode: json["travelCode"],
       travelDaysNumber: json["travelDaysNumber"],
+      travelText: json["travelText"], 
       travelDays: json["travelDays"] == null
           ? []
           : List<TravelDay>.from(
@@ -59,6 +63,7 @@ class TravelModel {
         "travelEndDate": travelEndDate,
         "travelCode": travelCode,
         "travelDaysNumber": travelDaysNumber,
+	"travelText": travelText, 
         "travelDays": travelDays.map((x) => x.toJson()).toList(),
       };
 
