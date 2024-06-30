@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:itravel/controllers/share_controller.dart';
 import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
-
+import 'package:flutter/services.dart';
 import '../commons/global_instance.dart';
 
 class ShareTravel extends StatefulWidget {
