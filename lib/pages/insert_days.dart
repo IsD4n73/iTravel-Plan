@@ -40,7 +40,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
     }
 
     if(widget.editPoint != null){
-      points = widget.editPoint;
+      points = widget.editPoint!;
     } 
     super.initState();
   }
@@ -129,7 +129,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                 onPressed: () async {
                   var canc = BotToast.showLoading();
 
-                  if(widget editPoint != null){
+                  if(widget.editPoint != null){
                     GlobalInstance.appDB.delete(widget.travelTitle);
                   }
 
