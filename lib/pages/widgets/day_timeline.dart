@@ -5,7 +5,7 @@ import '../../models/travel_point.dart';
 class DayTimeline extends StatefulWidget {
   final List<TravelPoint> points;
   final int dayNumber;
-  final void Function() onTapAdd;
+  final bool Function() onTapAdd;
   final void Function(int i) onTapRem;
 
   const DayTimeline({
@@ -54,8 +54,9 @@ class _DayTimelineState extends State<DayTimeline> {
               child: InkWell(
                 onTap: () async {
                   setState(() {
-                    dayStep++;
-                    widget.onTapAdd();
+                    if(widget.onTapAdd()){
+                      dayStep++;
+                    } 
                   });
                 },
                 child: const Text(
