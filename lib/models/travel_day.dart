@@ -25,7 +25,7 @@ class TravelDay {
   Map<String, dynamic> toJson() => {
         "dayDate": dayDate,
         "dayTitle": dayTitle,
-        "TravelPoints": travelPoints.map((x) => x?.toJson()).toList(),
+        "TravelPoints": travelPoints.map((x) => x.toJson()).toList(),
       };
 
   @override

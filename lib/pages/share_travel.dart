@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:itravel/controllers/share_controller.dart';
 import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
+
+import '../commons/global_instance.dart';
 
 class ShareTravel extends StatefulWidget {
   TravelModel travel;
@@ -17,7 +21,22 @@ class _ShareTravelState extends State<ShareTravel> {
 
   @override
   void initState() {
-    if (widget.travel.travelCode == null) {}
+    if (widget.travel.travelCode == null) {
+      ShareController.getShareCode(widget.travel).then(
+        (value) {
+          setState(() {
+            widget.travel.travelCode = value;
+          });
+          GlobalInstance.appDB.delete(widget.travel.travelTitle);
+          GlobalInstance.appDB.put(
+            widget.travel.travelTitle,
+            jsonEncode(
+              widget.travel.toJson(),
+            ),
+          );
+        },
+      );
+    }
     super.initState();
   }
 

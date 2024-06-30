@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:itravel/models/travel_model.dart';
-import 'package:itravel/pages/insert_day_details.dart';
 import 'package:itravel/pages/share_travel.dart';
-import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:timelines_plus/timelines_plus.dart';
+
+import '../commons/global_instance.dart';
+import 'home.dart';
 
 class TravelDetailsPage extends StatefulWidget {
   final TravelModel travel;
@@ -178,7 +179,19 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                     child: const Text("Modfica itinerario"),
                   ),*/
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      GlobalInstance.appDB.delete(widget.travel.travelTitle);
+                      Navigator.popUntil(
+                        context,
+                        (route) => route.isFirst,
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
                     child: const Text("Elimina itinerario"),
                   ),
                 ],

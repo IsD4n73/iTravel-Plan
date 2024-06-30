@@ -27,7 +27,7 @@ class TravelModel {
     required this.travelTitle,
     required this.travelStartDate,
     required this.travelEndDate,
-    required this.travelCode, 
+    required this.travelCode,
     required this.travelDaysNumber,
     required this.travelDays,
   });
@@ -35,7 +35,7 @@ class TravelModel {
   final String? travelTitle;
   final String? travelStartDate;
   final String? travelEndDate;
-  final String? travelCode;
+  String? travelCode;
   final int? travelDaysNumber;
   final List<TravelDay> travelDays;
 
