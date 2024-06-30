@@ -180,7 +180,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                         startDate: widget.travel.travelStartDate,
                         travelTitle: widget.travel.travelTitle ,
                         endDate: widget.travel.travelEndDate,
-                      ),),),
+                      ),),);
                     },
                     child: const Text("Modfica itinerario"),
                   ),
