@@ -3,6 +3,7 @@ import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/share_travel.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 import 'package:itravel/pages/insert_days.dart';
+import 'package:itravel/models/travel_points.dart';
 
 import '../commons/global_instance.dart';
 import 'home.dart';
@@ -176,17 +177,17 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   ElevatedButton(
                     onPressed: () {
                       Map<int, List<TravelPoint>> points = {};
-                      for(int i=0; i < widget.travel.travelDaysNumber; i++){
+                      for(int i=0; i < widget.travel.travelDaysNumber ?? 0; i++){
                         points[i+1] = widget.travel.travelDays[i].travelPoints;
                       } 
 
                       
                       Navigator.push(context, MaterialPageRoute(builder: (context) => InsertDaysPage(
                         editPoint: points,
-                        travelDays: widget.travel.travelDaysNumber,
-                        startDate: widget.travel.travelStartDate,
-                        travelTitle: widget.travel.travelTitle ,
-                        endDate: widget.travel.travelEndDate,
+                        travelDays: widget.travel.travelDaysNumber ?? 0,
+                        startDate: widget.travel.travelStartDate ?? "",
+                        travelTitle: widget.travel.travelTitle ?? "",
+                        endDate: widget.travel.travelEndDate ?? "" ,
                       ),),);
                     },
                     child: const Text("Modfica itinerario"),
