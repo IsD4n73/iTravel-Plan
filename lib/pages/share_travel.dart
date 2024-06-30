@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:itravel/controllers/share_controller.dart';
 import 'package:itravel/models/travel_model.dart';
@@ -45,16 +45,24 @@ class _ShareTravelState extends State<ShareTravel> {
     return Scaffold(
       appBar: getAppAppbar(),
       body: Center(
-        child: InkWell(
-          onTap: widget.travel.travelCode == null ? null : () {},
-          child: Text(
-            widget.travel.travelCode ?? "In generazione...",
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        child:  Column(
+            children: [
+              const Text("Clicca il codice per copiarlo"),
+              InkWell(
+                onTap:widget.travel.travelCode == null ? null : () async {
+                  await Clipboard.setData(ClipboardData(text: widget.travel.travelCode!));
+                  BotToast.showText(text:"Codice copiato!");
+                },
+                child: Text(
+                  widget.travel.travelCode ?? "In generazione...",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ], 
+          ), 
       ),
     );
   }
