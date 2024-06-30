@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:banner_listtile/banner_listtile.dart';
 
 class CurvedListItem extends StatelessWidget {
   const CurvedListItem({
+    super.key,
     required this.title,
     required this.days,
     required this.color,

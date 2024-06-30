@@ -37,7 +37,7 @@ class _InsertTravelPageState extends State<InsertTravelPage> {
                   filled: true,
                   hintStyle: const TextStyle(color: Colors.black),
                   hintText: "Titolo viaggio",
-                  fillColor: Colors.orangeAccent,
+                  fillColor: Colors.white,
                 ),
               ),
               const SizedBox(height: 40),
@@ -85,8 +85,9 @@ class _InsertTravelPageState extends State<InsertTravelPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => INsertDaysPage(
+                        builder: (context) => InsertDaysPage(
                           travelDays: travelDays,
+                          travelTitle: titleController.text,
                           startDate: _startDate,
                           endDate: _endDate,
                         ),

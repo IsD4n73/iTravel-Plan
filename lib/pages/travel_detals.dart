@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 
 class TravelDetailsPage extends StatefulWidget {
-  
-  const INsertDaysPage({
-    super.key, 
+  const TravelDetailsPage({
+    super.key,
   });
 
   @override

@@ -3,6 +3,8 @@ import 'package:itravel/pages/insert_travel.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:itravel/pages/widgets/curved_list_item.dart';
 
+import '../models/travel_model.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -11,6 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<TravelModel> travels = [];
+
+  int testVar = 3;
+
   @override
   void initState() {
     super.initState();
