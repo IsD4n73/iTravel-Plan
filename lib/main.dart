@@ -32,6 +32,10 @@ class MyApp extends StatelessWidget {
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xff202020), 
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color(0xff202020), 
+        ), 
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.orange,
