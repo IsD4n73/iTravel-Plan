@@ -5,7 +5,7 @@ import '../../models/travel_point.dart';
 class DayTimeline extends StatefulWidget {
   final List<TravelPoint> points;
   final int dayNumber;
-  final bool Function() onTapAdd;
+  final Future<bool> Function() onTapAdd;
   final void Function(int i) onTapRem;
 
   const DayTimeline({
