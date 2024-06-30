@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/pages/insert_travel.dart';
+import 'package:itravel/pages/travel_detals.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:itravel/pages/widgets/curved_list_item.dart';
 
@@ -14,11 +18,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<TravelModel> travels = [];
-
   int testVar = 3;
 
   @override
   void initState() {
+    for (String key in GlobalInstance.appDB.keys) {
+      setState(() {
+        travels.add(
+          TravelModel.fromJson(
+            jsonDecode(
+              GlobalInstance.appDB.get(key),
+            ),
+          ),
+        );
+      });
+    }
     super.initState();
   }
 
@@ -37,21 +51,53 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: SingleChildScrollView(
-        child: ListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            CurvedListItem(
-              title: "title",
-              days: 2,
-              onTap: () {},
-              color: Colors.orange,
-              nextColor: Colors.orangeAccent,
+      body: travels.isEmpty
+          ? const Center(
+              child: Text(
+              "Non sono stati trovati itinerari\n😔",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ))
+          : SingleChildScrollView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: travels.length,
+                itemBuilder: (context, index) {
+                  Color colorOne = Colors.orange;
+                  Color colorTwo = Colors.orangeAccent;
+
+                  if (travels.length == 1) {
+                    colorTwo = Colors.orange;
+                  }
+
+                  if (index % 2 != 0) {
+                    colorOne = Colors.orangeAccent;
+                    colorTwo = Colors.orange;
+                  }
+
+                  if (index == travels.length - 1) {
+                    colorTwo = Colors.black;
+                  }
+
+                  return CurvedListItem(
+                    title: travels[index].travelTitle ?? "",
+                    days: travels[index].travelDaysNumber ?? 0,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TravelDetailsPage(travel: travels[index]),
+                        ),
+                      );
+                    },
+                    color: colorOne,
+                    nextColor: colorTwo,
+                  );
+                },
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

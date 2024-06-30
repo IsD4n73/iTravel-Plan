@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/models/travel_day.dart';
 import 'package:itravel/models/travel_model.dart';
+import 'package:itravel/pages/home.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:itravel/pages/widgets/day_timeline.dart';
 import 'package:timelines_plus/timelines_plus.dart';
@@ -93,9 +96,9 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                                   ),
                                 );
 
-                                if(tp != null){
+                                if (tp != null) {
                                   points[index + 1]?.add(tp);
-                                } 
+                                }
                                 setState(() {});
                                 return (tp != null);
                               },
@@ -117,22 +120,42 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(points);
+                onPressed: () async {
+                  var canc = BotToast.showLoading();
 
-                  TravelDay(
-                    dayDate: null,
-                    dayTitle: "Giorno",
-                    travelPoints: [],
+                  List<TravelDay> days = [];
+
+                  points.forEach(
+                    (key, value) {
+                      days.add(
+                        TravelDay(
+                          dayDate: null,
+                          dayTitle: "Giorno $key",
+                          travelPoints: value,
+                        ),
+                      );
+                    },
                   );
 
-                  TravelModel(
+                  TravelModel travel = TravelModel(
                     travelTitle: widget.travelTitle,
                     travelStartDate: widget.startDate,
                     travelEndDate: widget.endDate,
                     travelCode: null,
                     travelDaysNumber: widget.travelDays,
-                    travelDays: [],
+                    travelDays: days,
+                  );
+
+                  await GlobalInstance.appDB
+                      .put(travel.travelTitle, jsonEncode(travel.toJson()));
+                  canc();
+
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
                   );
                 },
                 child: const Text("Salva Itinerario"),

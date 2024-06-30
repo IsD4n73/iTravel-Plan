@@ -1,20 +1,14 @@
-import 'dart:io';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:sembast/sembast.dart';
-import 'package:sembast/sembast_io.dart';
 
 class GlobalInstance {
-  static late Database appDB;
+  static late Box appDB;
 
   static http.Client appClient = http.Client();
 
   static initDB() async {
     var document = await getApplicationDocumentsDirectory();
-    File("${document.path}/iTravel.db").createSync();
-
-    DatabaseFactory dbFactory = databaseFactoryIo;
-    appDB =
-        await dbFactory.openDatabase("${document.path}/KemonoDownloader.db");
+    appDB = await Hive.openBox('iTravelDB', path: document.path);
   }
 }

@@ -84,7 +84,9 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
                           pointHour: timeTap != null
                               ? "${timeTap!.hour} : ${timeTap!.minute}"
                               : null,
-                          pointDescription: descController.text,
+                          pointDescription: descController.text.isEmpty
+                              ? null
+                              : descController.text,
                         ),
                       );
                     } else {
