@@ -16,8 +16,10 @@ import 'insert_day_details.dart';
 class InsertDaysPage extends StatefulWidget {
   final int travelDays;
   final String startDate, endDate, travelTitle;
+  final Map<int, List<TravelPoint>>? editPoint = null;
   const InsertDaysPage({
     super.key,
+    this.editPoint,
     required this.travelDays,
     required this.startDate,
     required this.travelTitle,
@@ -36,6 +38,10 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
     for (int d = 0; d < widget.travelDays; d++) {
       points[d + 1] = [];
     }
+
+    if(widget.editPoint != null){
+      points = widget.editPoint;
+    } 
     super.initState();
   }
 
@@ -123,6 +129,10 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                 onPressed: () async {
                   var canc = BotToast.showLoading();
 
+                  if(widget editPoint != null){
+                    GlobalInstance.appDB.delete(widget.travelTitle);
+                  }
+
                   List<TravelDay> days = [];
 
                   points.forEach(
@@ -145,6 +155,8 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                     travelDaysNumber: widget.travelDays,
                     travelDays: days,
                   );
+
+                
 
                   await GlobalInstance.appDB
                       .put(travel.travelTitle, jsonEncode(travel.toJson()));
