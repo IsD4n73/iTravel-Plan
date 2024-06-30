@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/share_travel.dart';
 import 'package:timelines_plus/timelines_plus.dart';
+import 'package:itravel/pages/insert_days.dart';
 
 import '../commons/global_instance.dart';
 import 'home.dart';
@@ -174,8 +175,14 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      Map<int, List<TravelPoint>> points = {};
+                      for(int i=0; i < widget.travel.travelDaysNumber; i++){
+                        points[i+1] = widget.travel.travelDays[i].travelPoints;
+                      } 
+
+                      
                       Navigator.push(context, MaterialPageRoute(builder: (context) => InsertDaysPage(
-                        editPoint: null,
+                        editPoint: points,
                         travelDays: widget.travel.travelDaysNumber,
                         startDate: widget.travel.travelStartDate,
                         travelTitle: widget.travel.travelTitle ,
