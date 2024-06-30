@@ -85,7 +85,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                               points: points[index + 1] ?? [],
                               dayNumber: index + 1,
                               onTapAdd: () async {
-                                TravelPoint tp = await Navigator.push(
+                                TravelPoint? tp = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
@@ -93,9 +93,11 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                                   ),
                                 );
 
-                                points[index + 1]?.add(tp);
-                                
+                                if(tp != null){
+                                  points[index + 1]?.add(tp);
+                                } 
                                 setState(() {});
+                                return tp != null;
                               },
                               onTapRem: (int i) {
                                 setState(() {
