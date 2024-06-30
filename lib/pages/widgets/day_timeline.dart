@@ -54,7 +54,7 @@ class _DayTimelineState extends State<DayTimeline> {
               child: InkWell(
                 onTap: () async {
                   setState(() {
-                    if(widget.onTapAdd()){
+                    if(await widget.onTapAdd()){
                       dayStep++;
                     } 
                   });
