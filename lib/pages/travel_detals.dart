@@ -177,7 +177,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   ElevatedButton(
                     onPressed: () {
                       Map<int, List<TravelPoint>> points = {};
-                      for(int i=0; i < widget.travel.travelDaysNumber ?? 0; i++){
+                      for(int i=0; i < (widget.travel.travelDaysNumber ?? 0); i++){
                         points[i+1] = widget.travel.travelDays[i].travelPoints;
                       } 
 
