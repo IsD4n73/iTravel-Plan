@@ -53,11 +53,13 @@ class _DayTimelineState extends State<DayTimeline> {
               padding: const EdgeInsets.only(left: 8),
               child: InkWell(
                 onTap: () async {
-                  setState(() {
-                    if(await widget.onTapAdd()){
+                  
+                  if(await widget.onTapAdd()){
+                    setState(() {
                       dayStep++;
-                    } 
-                  });
+                    });
+                  } 
+                  
                 },
                 child: const Text(
                   "+ Aggiungi Tappa",
