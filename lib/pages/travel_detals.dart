@@ -3,7 +3,7 @@ import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/share_travel.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 import 'package:itravel/pages/insert_days.dart';
-import 'package:itravel/models/travel_points.dart';
+import 'package:itravel/models/travel_point.dart';
 
 import '../commons/global_instance.dart';
 import 'home.dart';
