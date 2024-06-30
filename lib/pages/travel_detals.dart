@@ -172,12 +172,18 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  /*ElevatedButton(
+                  ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => InsertDayDetailsPage,),),
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => InsertDaysPage(
+                        editPoint: null,
+                        travelDays: widget.travel.travelDaysNumber,
+                        startDate: widget.travel.travelStartDate,
+                        travelTitle: widget.travel.travelTitle ,
+                        endDate: widget.travel.travelEndDate,
+                      ),),),
                     },
                     child: const Text("Modfica itinerario"),
-                  ),*/
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       GlobalInstance.appDB.delete(widget.travel.travelTitle);
