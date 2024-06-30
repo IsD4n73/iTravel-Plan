@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   if (index == travels.length - 1) {
-                    colorTwo = Colors.black;
+                    colorTwo = const Color(0xff202020);
                   }
 
                   return CurvedListItem(
