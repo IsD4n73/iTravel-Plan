@@ -16,10 +16,12 @@ import 'insert_day_details.dart';
 class InsertDaysPage extends StatefulWidget {
   final int travelDays;
   final String startDate, endDate, travelTitle;
-  final Map<int, List<TravelPoint>>? editPoint = null;
+  final Map<int, List<TravelPoint>>? editPoint;
+
+
   const InsertDaysPage({
     super.key,
-    this.editPoint,
+    this.editPoint = null,
     required this.travelDays,
     required this.startDate,
     required this.travelTitle,
