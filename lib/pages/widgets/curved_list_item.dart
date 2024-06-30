@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:banner_listtile/banner_listtile.dart';
 
 class CurvedListItem extends StatelessWidget {
   const CurvedListItem({
