@@ -97,7 +97,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                                   points[index + 1]?.add(tp);
                                 } 
                                 setState(() {});
-                                return tp != null;
+                                return await (tp != null);
                               },
                               onTapRem: (int i) {
                                 setState(() {
