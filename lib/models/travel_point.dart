@@ -6,7 +6,7 @@ class TravelPoint {
   });
 
   final String? pointName;
-  final dynamic pointHour;
+  final String? pointHour;
   final String? pointDescription;
 
   factory TravelPoint.fromJson(Map<String, dynamic> json) {
