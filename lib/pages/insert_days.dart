@@ -16,11 +16,13 @@ import 'insert_day_details.dart';
 class InsertDaysPage extends StatefulWidget {
   final int travelDays;
   final String startDate, endDate, travelTitle;
+  final String? notes;
   final Map<int, List<TravelPoint>>? editPoint;
 
   const InsertDaysPage({
     super.key,
     this.editPoint,
+    this.notes,
     required this.travelDays,
     required this.startDate,
     required this.travelTitle,
@@ -33,6 +35,7 @@ class InsertDaysPage extends StatefulWidget {
 
 class _InsertDaysPageState extends State<InsertDaysPage> {
   Map<int, List<TravelPoint>> points = {};
+  TextEditingController notesController = TextEditingController();
 
   @override
   void initState() {
@@ -44,6 +47,10 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
       for (int d = 0; d < widget.travelDays; d++) {
         points[d + 1] = [];
       }
+    }
+
+    if (widget.notes != null) {
+      notesController.text = widget.notes!;
     }
     super.initState();
   }
@@ -150,6 +157,24 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
+              const Divider(),
+              const SizedBox(height: 10),
+              TextField(
+                controller: notesController,
+                maxLines: 5,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  hintStyle: const TextStyle(color: Colors.black),
+                  hintText: "Note",
+                  fillColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
                   var canc = BotToast.showLoading();
@@ -176,6 +201,9 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                     travelTitle: widget.travelTitle,
                     travelStartDate: widget.startDate,
                     travelEndDate: widget.endDate,
+                    travelText: notesController.text.isEmpty
+                        ? null
+                        : notesController.text,
                     travelCode: null,
                     travelDaysNumber: widget.travelDays,
                     travelDays: days,
