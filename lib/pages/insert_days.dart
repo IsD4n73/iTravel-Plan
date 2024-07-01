@@ -61,6 +61,12 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                 softWrap: true,
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 15),
+              const Text(
+                "- '+ Aggiungi Tappa' -> aggiung una tappa alla giornata\n- 'Icona con il mdeno' -> toglie la tappa dal giorno\n- 'click sulla tappa' -> modifica la tappa",
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 40),
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -97,6 +103,21 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                               points: points[index + 1] ?? [],
                               dayNumber: index + 1,
                               editDayStep: points[index + 1]?.length,
+                              onTapEdit: (trvl, ind) async {
+                                TravelPoint? tp = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        InsertDayDetailsPage(travelPoint: trvl),
+                                  ),
+                                );
+
+                                if (tp != null) {
+                                  points[index + 1]?[ind] = tp;
+                                }
+                                setState(() {});
+                                return (tp != null);
+                              },
                               onTapAdd: () async {
                                 TravelPoint? tp = await Navigator.push(
                                   context,

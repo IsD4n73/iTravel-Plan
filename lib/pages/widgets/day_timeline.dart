@@ -6,6 +6,7 @@ class DayTimeline extends StatefulWidget {
   final List<TravelPoint> points;
   final int dayNumber;
   final Future<bool> Function() onTapAdd;
+  final Future<bool> Function(TravelPoint trvl, int ind) onTapEdit;
   final void Function(int i) onTapRem;
   final int? editDayStep;
 
@@ -13,6 +14,7 @@ class DayTimeline extends StatefulWidget {
     required this.points,
     required this.dayNumber,
     required this.onTapAdd,
+    required this.onTapEdit,
     required this.onTapRem,
     this.editDayStep,
     super.key,
@@ -81,16 +83,21 @@ class _DayTimelineState extends State<DayTimeline> {
           }
           return Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.points[index].pointName ?? "",
-                ),
-                Text(
-                  widget.points[index].pointHour ?? "",
-                ),
-              ],
+            child: InkWell(
+              onTap: () {
+                widget.onTapEdit(widget.points[index], index);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.points[index].pointName ?? "",
+                  ),
+                  Text(
+                    widget.points[index].pointHour ?? "",
+                  ),
+                ],
+              ),
             ),
           );
         },

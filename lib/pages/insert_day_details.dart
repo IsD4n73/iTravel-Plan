@@ -1,12 +1,12 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 
 import '../models/travel_point.dart';
 
 class InsertDayDetailsPage extends StatefulWidget {
-  const InsertDayDetailsPage({super.key});
+  final TravelPoint? travelPoint;
+  const InsertDayDetailsPage({super.key, this.travelPoint});
 
   @override
   State<InsertDayDetailsPage> createState() => _InsertDayDetailsPageState();
@@ -16,6 +16,26 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TimeOfDay? timeTap;
+
+  @override
+  void initState() {
+    if (widget.travelPoint != null) {
+      nameController.text = widget.travelPoint!.pointName ?? "";
+      descController.text = widget.travelPoint!.pointDescription ?? "";
+      try {
+        List<String> splitted =
+            widget.travelPoint!.pointHour.toString().split(":");
+        timeTap = TimeOfDay(
+            hour: int.parse(splitted.first), minute: int.parse(splitted.last));
+      } catch (e) {
+        timeTap = null;
+      }
+
+      setState(() {});
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +113,7 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
                         text: "Il nome della tappe è obbligatorio");
                   }
                 },
-                child: const Text("Aggiungi"),
+                child: Text(widget.travelPoint == null ? "Aggiungi" : "Salva"),
               ),
             ],
           ),
