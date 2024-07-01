@@ -96,7 +96,7 @@ class _InsertSharedTravelState extends State<InsertSharedTravel> {
                             travel!.travelTitle, jsonEncode(travel!.toJson()));
 
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const HomePage(),

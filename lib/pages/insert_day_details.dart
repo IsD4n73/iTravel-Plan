@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/pages/widgets/appbar.dart';
 
 import '../models/travel_point.dart';
@@ -78,7 +79,7 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
                     Navigator.pop(
                       context,
                       TravelPoint(
-                        pointName: nameController.text,
+                        pointName: nameController.text.trim(),
                         pointHour: timeTap != null
                             ? "${timeTap!.hour} : ${timeTap!.minute}"
                             : null,
