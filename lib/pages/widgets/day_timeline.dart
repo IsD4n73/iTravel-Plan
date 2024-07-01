@@ -7,13 +7,15 @@ class DayTimeline extends StatefulWidget {
   final int dayNumber;
   final Future<bool> Function() onTapAdd;
   final void Function(int i) onTapRem;
+  final int? editDayStep;
 
   const DayTimeline({
     required this.points,
     required this.dayNumber,
-    super.key,
     required this.onTapAdd,
     required this.onTapRem,
+    this.editDayStep,
+    super.key,
   });
 
   @override
@@ -22,6 +24,14 @@ class DayTimeline extends StatefulWidget {
 
 class _DayTimelineState extends State<DayTimeline> {
   int dayStep = 0;
+
+  @override
+  void initState() {
+    setState(() {
+      dayStep = widget.editDayStep ?? 0;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +63,11 @@ class _DayTimelineState extends State<DayTimeline> {
               padding: const EdgeInsets.only(left: 8),
               child: InkWell(
                 onTap: () async {
-                  
-                  if(await widget.onTapAdd()){
+                  if (await widget.onTapAdd()) {
                     setState(() {
                       dayStep++;
                     });
-                  } 
-                  
+                  }
                 },
                 child: const Text(
                   "+ Aggiungi Tappa",

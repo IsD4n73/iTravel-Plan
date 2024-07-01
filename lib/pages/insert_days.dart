@@ -18,10 +18,9 @@ class InsertDaysPage extends StatefulWidget {
   final String startDate, endDate, travelTitle;
   final Map<int, List<TravelPoint>>? editPoint;
 
-
   const InsertDaysPage({
     super.key,
-    this.editPoint = null,
+    this.editPoint,
     required this.travelDays,
     required this.startDate,
     required this.travelTitle,
@@ -37,13 +36,15 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
 
   @override
   void initState() {
-    for (int d = 0; d < widget.travelDays; d++) {
-      points[d + 1] = [];
+    if (widget.editPoint != null) {
+      for (int d = 0; d < widget.editPoint!.length; d++) {
+        points[d + 1] = widget.editPoint![d + 1]!;
+      }
+    } else {
+      for (int d = 0; d < widget.travelDays; d++) {
+        points[d + 1] = [];
+      }
     }
-
-    if(widget.editPoint != null){
-      points = widget.editPoint!;
-    } 
     super.initState();
   }
 
@@ -95,6 +96,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                             DayTimeline(
                               points: points[index + 1] ?? [],
                               dayNumber: index + 1,
+                              editDayStep: points[index + 1]?.length,
                               onTapAdd: () async {
                                 TravelPoint? tp = await Navigator.push(
                                   context,
@@ -131,7 +133,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                 onPressed: () async {
                   var canc = BotToast.showLoading();
 
-                  if(widget.editPoint != null){
+                  if (widget.editPoint != null) {
                     GlobalInstance.appDB.delete(widget.travelTitle);
                   }
 
@@ -157,8 +159,6 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                     travelDaysNumber: widget.travelDays,
                     travelDays: days,
                   );
-
-                
 
                   await GlobalInstance.appDB
                       .put(travel.travelTitle, jsonEncode(travel.toJson()));
