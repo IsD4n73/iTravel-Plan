@@ -217,6 +217,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

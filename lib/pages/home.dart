@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:itravel/commons/global_instance.dart';
+import 'package:itravel/pages/insert_shared.dart';
 import 'package:itravel/pages/insert_travel.dart';
 import 'package:itravel/pages/travel_detals.dart';
-import 'package:itravel/pages/widgets/appbar.dart';
 import 'package:itravel/pages/widgets/curved_list_item.dart';
 
 import '../models/travel_model.dart';
@@ -39,7 +39,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppAppbar(),
+      appBar: AppBar(
+        title: const Text("iTravel"),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const InsertSharedTravel(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add_link),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
