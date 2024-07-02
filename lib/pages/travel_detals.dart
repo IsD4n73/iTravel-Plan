@@ -153,8 +153,16 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                   builder: TimelineTileBuilder.connected(
                                     connectionDirection:
                                         ConnectionDirection.before,
-                                    indicatorBuilder: (_, index) =>
-                                        Indicator.outlined(borderWidth: 2),
+                                    indicatorBuilder: (_, indexP) => widget
+                                                .travel
+                                                .travelDays[index]
+                                                .travelPoints[indexP]
+                                                .pointDescription ==
+                                            null
+                                        ? Indicator.outlined(
+                                            borderWidth: 2,
+                                          )
+                                        : Indicator.dot(),
                                     connectorBuilder: (_, index, ___) =>
                                         Connector.solidLine(),
                                     contentsBuilder: (_, indexP) {
@@ -196,13 +204,13 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    widget
+                                                    (widget
                                                             .travel
                                                             .travelDays[index]
                                                             .travelPoints[
                                                                 indexP]
                                                             .pointName ??
-                                                        "",
+                                                        ""),
                                                     style: TextStyle(
                                                       color: GlobalInstance
                                                           .primaryColor,
