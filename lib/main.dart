@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:itravel/commons/global_instance.dart';
 import 'package:itravel/pages/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
 
   await GlobalInstance.initDB();
 

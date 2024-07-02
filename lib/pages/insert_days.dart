@@ -228,6 +228,7 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
                   },
                   child: const Text("Salva Itinerario"),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
