@@ -204,13 +204,17 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    (widget
+                                                    ("${widget
                                                             .travel
                                                             .travelDays[index]
                                                             .travelPoints[
                                                                 indexP]
-                                                            .pointName ??
-                                                        ""),
+                                                            .pointName} ${widget
+                                                .travel
+                                                .travelDays[index]
+                                                .travelPoints[indexP]
+                                                .pointDescription ==
+                                            null ? "" : " +" }"),
                                                     style: TextStyle(
                                                       color: GlobalInstance
                                                           .primaryColor,
