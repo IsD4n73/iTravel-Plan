@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<TravelModel> travels = [];
-  int testVar = 3;
 
   @override
   void initState() {

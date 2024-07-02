@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:itravel/controllers/date_controller.dart';
 import 'package:itravel/models/travel_model.dart';
 import 'package:itravel/pages/share_travel.dart';
 import 'package:timelines_plus/timelines_plus.dart';
@@ -22,6 +23,30 @@ class TravelDetailsPage extends StatefulWidget {
 }
 
 class _TravelDetailsPageState extends State<TravelDetailsPage> {
+  late int todayIndex;
+
+  @override
+  void initState() {
+    var days = DateController.getDaysBeetween(
+      start: widget.travel.travelStartDate,
+      end: widget.travel.travelEndDate,
+    );
+
+    DateTime today = DateTime.now();
+
+    todayIndex = days.indexWhere(
+      (element) =>
+          element.day == today.day &&
+          element.month == today.month &&
+          element.year == today.year,
+    );
+
+    setState(() {});
+
+    print("Today index = $todayIndex");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -84,17 +109,40 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                       itemCount: widget.travel.travelDays.length,
                       contentsBuilder: (_, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "Giorno ${index + 1}",
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Giorno ${index + 1}",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  todayIndex == index
+                                      ? Container(
+                                          padding: const EdgeInsets.all(3),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(8),
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            "OGGI",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ],
                               ),
                               FixedTimeline.tileBuilder(
                                 theme: TimelineTheme.of(context).copyWith(
