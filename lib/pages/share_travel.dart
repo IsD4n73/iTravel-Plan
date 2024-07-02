@@ -45,24 +45,48 @@ class _ShareTravelState extends State<ShareTravel> {
     return Scaffold(
       appBar: getAppAppbar(),
       body: Center(
-        child:  Column(
-            children: [
-              const Text("Clicca il codice per copiarlo"),
-              InkWell(
-                onTap:widget.travel.travelCode == null ? null : () async {
-                  await Clipboard.setData(ClipboardData(text: widget.travel.travelCode!));
-                  BotToast.showText(text:"Codice copiato!");
-                },
-                child: Text(
-                  widget.travel.travelCode ?? "In generazione...",
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+        child: Column(
+          children: [
+            const Text("Clicca il codice per copiarlo"),
+            InkWell(
+              onTap: widget.travel.travelCode == null
+                  ? null
+                  : () async {
+                      await Clipboard.setData(
+                          ClipboardData(text: widget.travel.travelCode!));
+                      BotToast.showText(text: "Codice copiato!");
+                    },
+              child: Text(
+                widget.travel.travelCode ?? "In generazione...",
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ], 
-          ), 
+            ),
+            const SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: () async {
+                var canc = BotToast.showLoading();
+                var value = await ShareController.getShareCode(widget.travel);
+
+                setState(() {
+                  widget.travel.travelCode = value;
+                });
+                GlobalInstance.appDB.delete(widget.travel.travelTitle);
+                GlobalInstance.appDB.put(
+                  widget.travel.travelTitle,
+                  jsonEncode(
+                    widget.travel.toJson(),
+                  ),
+                );
+
+                canc();
+              },
+              child: const Text("Genera un altro codice"),
+            ),
+          ],
+        ),
       ),
     );
   }
