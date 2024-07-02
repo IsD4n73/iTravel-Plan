@@ -42,8 +42,6 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
     );
 
     setState(() {});
-
-    print("Today index = $todayIndex");
     super.initState();
   }
 
