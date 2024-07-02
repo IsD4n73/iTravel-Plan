@@ -3,4 +3,5 @@ class AppUrls {
 
   static String shareTravelUrl = "$baseUrl/api/iTravel/share-travel.php";
   static String getSaredTravelUrl = "$baseUrl/api/iTravel/get-travel.php";
+  static String getCodeUrl = "$baseUrl/api/iTravel/generate-code.php";
 }
