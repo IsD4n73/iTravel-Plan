@@ -87,10 +87,13 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
                     context: context,
                     initialTime: tod,
                   );
+
+                  timeTap?.format(context);
+
                   setState(() {});
                 },
                 child: Text(
-                    "Seleziona un orario ${timeTap != null ? "(${timeTap!.hour}:${timeTap!.minute})" : ""}"),
+                    "Seleziona un orario ${timeTap != null ? "(${timeTap?.format(context)})" : ""}"),
               ),
               const SizedBox(height: 20),
               TextButton(
@@ -100,9 +103,7 @@ class _InsertDayDetailsPageState extends State<InsertDayDetailsPage> {
                       context,
                       TravelPoint(
                         pointName: nameController.text.trim(),
-                        pointHour: timeTap != null
-                            ? "${timeTap!.hour} : ${timeTap!.minute}"
-                            : null,
+                        pointHour: timeTap?.format(context),
                         pointDescription: descController.text.isEmpty
                             ? null
                             : descController.text,

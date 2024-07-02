@@ -177,12 +177,12 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                 ),
                                               ),
                                               Text(
-                                                widget
+                                                (widget
                                                         .travel
                                                         .travelDays[index]
                                                         .travelPoints[indexP]
                                                         .pointHour ??
-                                                    "",
+                                                    ""),
                                               ),
                                             ],
                                           ),
@@ -193,7 +193,16 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                       .travelPoints[indexP]
                                                       .pointDescription !=
                                                   null
-                                              ? Container(
+                                              ? Text(
+                                                  widget
+                                                      .travel
+                                                      .travelDays[index]
+                                                      .travelPoints[indexP]
+                                                      .pointDescription!,
+                                                  style: const TextStyle(
+                                                      fontStyle:
+                                                          FontStyle.italic),
+                                                ) /*Container(
                                                   padding:
                                                       const EdgeInsets.all(5),
                                                   decoration: BoxDecoration(
@@ -215,7 +224,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                         fontStyle:
                                                             FontStyle.italic),
                                                   ),
-                                                )
+                                                )*/
                                               : const SizedBox.shrink(),
                                         ],
                                       ),

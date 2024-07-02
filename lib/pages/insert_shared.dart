@@ -90,8 +90,7 @@ class _InsertSharedTravelState extends State<InsertSharedTravel> {
                         onPressed: () async {
                           if (GlobalInstance.appDB
                               .containsKey(travel!.travelTitle)) {
-                            BotToast.showText(text: "Itinerario gia presente");
-                            return;
+                            GlobalInstance.appDB.delete(travel!.travelTitle);
                           }
 
                           await GlobalInstance.appDB.put(travel!.travelTitle,
