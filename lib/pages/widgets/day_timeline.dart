@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timelines_plus/timelines_plus.dart';
+import '../../commons/global_instance.dart';
 import '../../models/travel_point.dart';
 
 class DayTimeline extends StatefulWidget {
@@ -40,7 +41,7 @@ class _DayTimelineState extends State<DayTimeline> {
     return FixedTimeline.tileBuilder(
       theme: TimelineTheme.of(context).copyWith(
         nodePosition: 0,
-        color: Colors.orange,
+        color: GlobalInstance.primaryColor,
       ),
       builder: TimelineTileBuilder(
         indicatorBuilder: (_, index) => (index + 1 == dayStep + 1)
@@ -71,11 +72,11 @@ class _DayTimelineState extends State<DayTimeline> {
                     });
                   }
                 },
-                child: const Text(
+                child: Text(
                   "+ Aggiungi Tappa",
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
-                    color: Colors.orangeAccent,
+                    color: GlobalInstance.primaryColor,
                   ),
                 ),
               ),

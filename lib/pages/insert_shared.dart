@@ -78,8 +78,8 @@ class _InsertSharedTravelState extends State<InsertSharedTravel> {
                       const SizedBox(height: 10),
                       Text(
                         (travel!.travelTitle ?? "").toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.orange,
+                        style: TextStyle(
+                          color: GlobalInstance.primaryColor,
                         ),
                       ),
                       const SizedBox(height: 20),

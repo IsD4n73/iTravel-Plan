@@ -80,16 +80,16 @@ class _HomePageState extends State<HomePage> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: travels.length,
                 itemBuilder: (context, index) {
-                  Color colorOne = Colors.orange;
-                  Color colorTwo = Colors.orangeAccent;
+                  Color colorOne = GlobalInstance.primaryColor;
+                  Color colorTwo = GlobalInstance.secondaryColor;
 
                   if (travels.length == 1) {
-                    colorTwo = Colors.orange;
+                    colorTwo = GlobalInstance.primaryColor;
                   }
 
                   if (index % 2 != 0) {
-                    colorOne = Colors.orangeAccent;
-                    colorTwo = Colors.orange;
+                    colorOne = GlobalInstance.secondaryColor;
+                    colorTwo = GlobalInstance.primaryColor;
                   }
 
                   if (index == travels.length - 1) {

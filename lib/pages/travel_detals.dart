@@ -6,7 +6,6 @@ import 'package:itravel/pages/share_travel.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 import 'package:itravel/pages/insert_days.dart';
 import 'package:itravel/models/travel_point.dart';
-
 import '../commons/global_instance.dart';
 import 'home.dart';
 
@@ -76,8 +75,8 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   const SizedBox(height: 10),
                   Text(
                     (widget.travel.travelTitle ?? "").toUpperCase(),
-                    style: const TextStyle(
-                      color: Colors.orange,
+                    style: TextStyle(
+                      color: GlobalInstance.primaryColor,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -93,7 +92,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   FixedTimeline.tileBuilder(
                     theme: TimelineThemeData(
                       nodePosition: 0,
-                      color: Colors.orange,
+                      color: GlobalInstance.primaryColor,
                       indicatorTheme: const IndicatorThemeData(
                         position: 0,
                         size: 20,
@@ -119,16 +118,17 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                   Text(
                                     "Giorno ${index + 1}",
                                     style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   todayIndex == index
                                       ? Container(
                                           padding: const EdgeInsets.all(3),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.orange,
-                                            borderRadius: BorderRadius.all(
+                                          decoration: BoxDecoration(
+                                            color: GlobalInstance.primaryColor,
+                                            borderRadius:
+                                                const BorderRadius.all(
                                               Radius.circular(8),
                                             ),
                                           ),
@@ -142,96 +142,94 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                       : const SizedBox.shrink(),
                                 ],
                               ),
-                              FixedTimeline.tileBuilder(
-                                theme: TimelineTheme.of(context).copyWith(
-                                  nodePosition: 0,
-                                  color: Colors.orange,
-                                ),
-                                builder: TimelineTileBuilder.connected(
-                                  connectionDirection:
-                                      ConnectionDirection.before,
-                                  indicatorBuilder: (_, index) =>
-                                      Indicator.outlined(borderWidth: 2),
-                                  connectorBuilder: (_, index, ___) =>
-                                      Connector.solidLine(),
-                                  contentsBuilder: (_, indexP) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                widget
-                                                        .travel
-                                                        .travelDays[index]
-                                                        .travelPoints[indexP]
-                                                        .pointName ??
-                                                    "",
-                                                style: const TextStyle(
-                                                  color: Colors.orange,
-                                                ),
-                                              ),
-                                              Text(
-                                                (widget
-                                                        .travel
-                                                        .travelDays[index]
-                                                        .travelPoints[indexP]
-                                                        .pointHour ??
-                                                    ""),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 10),
-                                          widget
-                                                      .travel
-                                                      .travelDays[index]
-                                                      .travelPoints[indexP]
-                                                      .pointDescription !=
-                                                  null
-                                              ? Text(
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: FixedTimeline.tileBuilder(
+                                  theme: TimelineTheme.of(context).copyWith(
+                                    nodePosition: 0,
+                                    indicatorPosition: 0,
+                                    color: GlobalInstance.primaryColor,
+                                  ),
+                                  builder: TimelineTileBuilder.connected(
+                                    connectionDirection:
+                                        ConnectionDirection.before,
+                                    indicatorBuilder: (_, index) =>
+                                        Indicator.outlined(borderWidth: 2),
+                                    connectorBuilder: (_, index, ___) =>
+                                        Connector.solidLine(),
+                                    contentsBuilder: (_, indexP) {
+                                      return Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            8, 0, 8, 8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
                                                   widget
-                                                      .travel
-                                                      .travelDays[index]
-                                                      .travelPoints[indexP]
-                                                      .pointDescription!,
-                                                  style: const TextStyle(
-                                                      fontStyle:
-                                                          FontStyle.italic),
-                                                ) /*Container(
-                                                  padding:
-                                                      const EdgeInsets.all(5),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: Colors.white,
-                                                      width: 0.5,
-                                                    ),
+                                                          .travel
+                                                          .travelDays[index]
+                                                          .travelPoints[indexP]
+                                                          .pointName ??
+                                                      "",
+                                                  style: TextStyle(
+                                                    color: GlobalInstance
+                                                        .primaryColor,
+                                                    fontSize: 16,
                                                   ),
-                                                  child: Text(
-                                                    widget
+                                                ),
+                                                Text(
+                                                  (widget
+                                                          .travel
+                                                          .travelDays[index]
+                                                          .travelPoints[indexP]
+                                                          .pointHour ??
+                                                      ""),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            widget
                                                         .travel
                                                         .travelDays[index]
                                                         .travelPoints[indexP]
-                                                        .pointDescription!,
-                                                    style: const TextStyle(
-                                                        fontStyle:
-                                                            FontStyle.italic),
-                                                  ),
-                                                )*/
-                                              : const SizedBox.shrink(),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  itemCount: widget.travel.travelDays[index]
-                                      .travelPoints.length,
+                                                        .pointDescription !=
+                                                    null
+                                                ? Card(
+                                                    color: GlobalInstance
+                                                        .primaryColor
+                                                        .withOpacity(0.7),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      child: Text(
+                                                        widget
+                                                            .travel
+                                                            .travelDays[index]
+                                                            .travelPoints[
+                                                                indexP]
+                                                            .pointDescription!,
+                                                        style: const TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: widget.travel.travelDays[index]
+                                        .travelPoints.length,
+                                  ),
                                 ),
                               )
                             ],
@@ -251,9 +249,9 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
-                      shape: const Border(
+                      shape: Border(
                         left: BorderSide(
-                          color: Colors.orange,
+                          color: GlobalInstance.primaryColor,
                           width: 8,
                         ),
                       ),
@@ -262,10 +260,10 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                         padding: const EdgeInsets.all(15),
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               "Note",
                               style: TextStyle(
-                                color: Colors.orange,
+                                color: GlobalInstance.primaryColor,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -274,9 +272,10 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                             Text(
                               widget.travel.travelText ??
                                   "Nessuna nota presente",
-                              textAlign: TextAlign.center,
+                              softWrap: true,
                               style: const TextStyle(
                                 color: Colors.black,
+                                fontSize: 16,
                               ),
                             ),
                           ],
@@ -328,12 +327,12 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         const SizedBox(height: 10),
-                                        const Text(
+                                        Text(
                                           "Vuoi eliminare l'itinerario?",
                                           style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.orange,
+                                            color: GlobalInstance.primaryColor,
                                           ),
                                         ),
                                         const SizedBox(height: 10),

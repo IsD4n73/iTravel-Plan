@@ -61,169 +61,175 @@ class _InsertDaysPageState extends State<InsertDaysPage> {
       appBar: getAppAppbar(),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Giorni totali: ${widget.travelDays}\n\nDal ${widget.startDate} al ${widget.endDate}",
-                softWrap: true,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                "- '+ Aggiungi Tappa' -> aggiung una tappa alla giornata\n- 'Icona con il mdeno' -> toglie la tappa dal giorno\n- 'click sulla tappa' -> modifica la tappa",
-                softWrap: true,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: FixedTimeline.tileBuilder(
-                  theme: TimelineThemeData(
-                    nodePosition: 0,
-                    color: Colors.orange,
-                    indicatorTheme: const IndicatorThemeData(
-                      position: 0,
-                      size: 20,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              children: [
+                Text(
+                  "Giorni totali: ${widget.travelDays}\n\nDal ${widget.startDate} al ${widget.endDate}",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  "- '+ Aggiungi Tappa' -> aggiung una tappa alla giornata\n- 'Icona con il mdeno' -> toglie la tappa dal giorno\n- 'click sulla tappa' -> modifica la tappa",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: FixedTimeline.tileBuilder(
+                    theme: TimelineThemeData(
+                      nodePosition: 0,
+                      color: GlobalInstance.primaryColor,
+                      indicatorTheme: const IndicatorThemeData(
+                        position: 0,
+                        size: 20,
+                      ),
+                      connectorTheme: const ConnectorThemeData(
+                        thickness: 2.5,
+                      ),
                     ),
-                    connectorTheme: const ConnectorThemeData(
-                      thickness: 2.5,
-                    ),
-                  ),
-                  builder: TimelineTileBuilder.connected(
-                    connectionDirection: ConnectionDirection.before,
-                    itemCount: widget.travelDays,
-                    contentsBuilder: (_, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Giorno ${index + 1}",
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                    builder: TimelineTileBuilder.connected(
+                      connectionDirection: ConnectionDirection.before,
+                      itemCount: widget.travelDays,
+                      contentsBuilder: (_, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Giorno ${index + 1}",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            DayTimeline(
-                              points: points[index + 1] ?? [],
-                              dayNumber: index + 1,
-                              editDayStep: points[index + 1]?.length,
-                              onTapEdit: (trvl, ind) async {
-                                TravelPoint? tp = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        InsertDayDetailsPage(travelPoint: trvl),
-                                  ),
-                                );
+                              DayTimeline(
+                                points: points[index + 1] ?? [],
+                                dayNumber: index + 1,
+                                editDayStep: points[index + 1]?.length,
+                                onTapEdit: (trvl, ind) async {
+                                  TravelPoint? tp = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          InsertDayDetailsPage(
+                                              travelPoint: trvl),
+                                    ),
+                                  );
 
-                                if (tp != null) {
-                                  points[index + 1]?[ind] = tp;
-                                }
-                                setState(() {});
-                                return (tp != null);
-                              },
-                              onTapAdd: () async {
-                                TravelPoint? tp = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const InsertDayDetailsPage(),
-                                  ),
-                                );
+                                  if (tp != null) {
+                                    points[index + 1]?[ind] = tp;
+                                  }
+                                  setState(() {});
+                                  return (tp != null);
+                                },
+                                onTapAdd: () async {
+                                  TravelPoint? tp = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const InsertDayDetailsPage(),
+                                    ),
+                                  );
 
-                                if (tp != null) {
-                                  points[index + 1]?.add(tp);
-                                }
-                                setState(() {});
-                                return (tp != null);
-                              },
-                              onTapRem: (int i) {
-                                setState(() {
-                                  points[index + 1]?.removeAt(i);
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    indicatorBuilder: (_, index) {
-                      return const DotIndicator();
-                    },
-                    connectorBuilder: (_, index, ___) => Connector.solidLine(),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Divider(),
-              const SizedBox(height: 10),
-              TextField(
-                controller: notesController,
-                maxLines: 5,
-                style: const TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  hintStyle: const TextStyle(color: Colors.black),
-                  hintText: "Note",
-                  fillColor: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  var canc = BotToast.showLoading();
-
-                  if (widget.editPoint != null) {
-                    GlobalInstance.appDB.delete(widget.travelTitle);
-                  }
-
-                  List<TravelDay> days = [];
-
-                  points.forEach(
-                    (key, value) {
-                      days.add(
-                        TravelDay(
-                          dayDate: null,
-                          dayTitle: "Giorno $key",
-                          travelPoints: value,
-                        ),
-                      );
-                    },
-                  );
-
-                  TravelModel travel = TravelModel(
-                    travelTitle: widget.travelTitle,
-                    travelStartDate: widget.startDate,
-                    travelEndDate: widget.endDate,
-                    travelText: notesController.text.isEmpty
-                        ? null
-                        : notesController.text,
-                    travelCode: null,
-                    travelDaysNumber: widget.travelDays,
-                    travelDays: days,
-                  );
-
-                  await GlobalInstance.appDB
-                      .put(travel.travelTitle, jsonEncode(travel.toJson()));
-                  canc();
-
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                                  if (tp != null) {
+                                    points[index + 1]?.add(tp);
+                                  }
+                                  setState(() {});
+                                  return (tp != null);
+                                },
+                                onTapRem: (int i) {
+                                  setState(() {
+                                    points[index + 1]?.removeAt(i);
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      indicatorBuilder: (_, index) {
+                        return const DotIndicator();
+                      },
+                      connectorBuilder: (_, index, ___) =>
+                          Connector.solidLine(),
                     ),
-                  );
-                },
-                child: const Text("Salva Itinerario"),
-              ),
-            ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Divider(),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: notesController,
+                  maxLines: 20,
+                  onChanged: (value) => setState(() {}),
+                  style: const TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    filled: true,
+                    hintStyle: const TextStyle(color: Colors.black),
+                    hintText: "Note",
+                    fillColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () async {
+                    var canc = BotToast.showLoading();
+
+                    if (widget.editPoint != null) {
+                      GlobalInstance.appDB.delete(widget.travelTitle);
+                    }
+
+                    List<TravelDay> days = [];
+
+                    points.forEach(
+                      (key, value) {
+                        days.add(
+                          TravelDay(
+                            dayDate: null,
+                            dayTitle: "Giorno $key",
+                            travelPoints: value,
+                          ),
+                        );
+                      },
+                    );
+
+                    TravelModel travel = TravelModel(
+                      travelTitle: widget.travelTitle,
+                      travelStartDate: widget.startDate,
+                      travelEndDate: widget.endDate,
+                      travelText: notesController.text.isEmpty
+                          ? null
+                          : notesController.text,
+                      travelCode: null,
+                      travelDaysNumber: widget.travelDays,
+                      travelDays: days,
+                    );
+
+                    await GlobalInstance.appDB
+                        .put(travel.travelTitle, jsonEncode(travel.toJson()));
+                    canc();
+
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                  },
+                  child: const Text("Salva Itinerario"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
