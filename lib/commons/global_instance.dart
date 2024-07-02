@@ -6,8 +6,8 @@ import 'package:path_provider/path_provider.dart';
 class GlobalInstance {
   static late Box appDB;
 
-  static Color primaryColor = Colors.purple;
-  static Color secondaryColor = Colors.purpleAccent;
+  static Color primaryColor = Colors.orange;
+  static Color secondaryColor = Colors.orangeAccent;
 
   static initDB() async {
     appDB = await Hive.openBox(

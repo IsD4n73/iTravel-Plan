@@ -8,6 +8,7 @@ class TravelPoint {
   final String? pointName;
   final String? pointHour;
   final String? pointDescription;
+  bool showDesc = false;
 
   factory TravelPoint.fromJson(Map<String, dynamic> json) {
     return TravelPoint(

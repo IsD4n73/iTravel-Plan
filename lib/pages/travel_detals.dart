@@ -165,41 +165,75 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  widget
+                                            InkWell(
+                                              onTap: widget
                                                           .travel
                                                           .travelDays[index]
                                                           .travelPoints[indexP]
-                                                          .pointName ??
-                                                      "",
-                                                  style: TextStyle(
-                                                    color: GlobalInstance
-                                                        .primaryColor,
-                                                    fontSize: 16,
+                                                          .pointDescription ==
+                                                      null
+                                                  ? null
+                                                  : () {
+                                                      setState(() {
+                                                        widget
+                                                                .travel
+                                                                .travelDays[index]
+                                                                .travelPoints[
+                                                                    indexP]
+                                                                .showDesc =
+                                                            !widget
+                                                                .travel
+                                                                .travelDays[
+                                                                    index]
+                                                                .travelPoints[
+                                                                    indexP]
+                                                                .showDesc;
+                                                      });
+                                                    },
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    widget
+                                                            .travel
+                                                            .travelDays[index]
+                                                            .travelPoints[
+                                                                indexP]
+                                                            .pointName ??
+                                                        "",
+                                                    style: TextStyle(
+                                                      color: GlobalInstance
+                                                          .primaryColor,
+                                                      fontSize: 16,
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  (widget
-                                                          .travel
-                                                          .travelDays[index]
-                                                          .travelPoints[indexP]
-                                                          .pointHour ??
-                                                      ""),
-                                                ),
-                                              ],
+                                                  Text(
+                                                    (widget
+                                                            .travel
+                                                            .travelDays[index]
+                                                            .travelPoints[
+                                                                indexP]
+                                                            .pointHour ??
+                                                        ""),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                             const SizedBox(height: 10),
-                                            widget
+                                            (widget
+                                                            .travel
+                                                            .travelDays[index]
+                                                            .travelPoints[
+                                                                indexP]
+                                                            .pointDescription !=
+                                                        null &&
+                                                    widget
                                                         .travel
                                                         .travelDays[index]
                                                         .travelPoints[indexP]
-                                                        .pointDescription !=
-                                                    null
+                                                        .showDesc)
                                                 ? Card(
                                                     color: GlobalInstance
                                                         .primaryColor
@@ -215,6 +249,7 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                             .travelPoints[
                                                                 indexP]
                                                             .pointDescription!,
+                                                        softWrap: true,
                                                         style: const TextStyle(
                                                           fontStyle:
                                                               FontStyle.italic,
