@@ -193,15 +193,28 @@ class _TravelDetailsPageState extends State<TravelDetailsPage> {
                                                       .travelPoints[indexP]
                                                       .pointDescription !=
                                                   null
-                                              ? Text(
-                                                  widget
-                                                      .travel
-                                                      .travelDays[index]
-                                                      .travelPoints[indexP]
-                                                      .pointDescription!,
-                                                  style: const TextStyle(
-                                                      fontStyle:
-                                                          FontStyle.italic),
+                                              ? Container(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 0.5,
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    widget
+                                                        .travel
+                                                        .travelDays[index]
+                                                        .travelPoints[indexP]
+                                                        .pointDescription!,
+                                                    style: const TextStyle(
+                                                        fontStyle:
+                                                            FontStyle.italic),
+                                                  ),
                                                 )
                                               : const SizedBox.shrink(),
                                         ],
