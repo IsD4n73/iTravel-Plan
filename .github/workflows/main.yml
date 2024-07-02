@@ -21,13 +21,6 @@ jobs:
 
       - run: flutter pub get
       - run: flutter build apk --release
-      - run: flutter build web --base-href "/iTravel-Plan/"
-
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web/
-          publish_branch: site
 
       - uses: softprops/action-gh-release@v1
         with:
